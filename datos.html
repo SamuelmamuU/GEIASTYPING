@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Datos de Usuarios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family:"Poppins", sans-serif; background:#f4f4f4; }
+    h2 { text-align:center; margin-top:20px; }
+    table { margin:40px auto; border-collapse:collapse; width:95%; background:#fff; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+    th, td { padding:12px; border-bottom:1px solid #ddd; text-align:center; }
+    th { background:#2196f3; color:#fff; }
+    .btn-red { background:red; color:#fff; border:none; padding:6px 10px; border-radius:4px; cursor:pointer; }
+    .btn-red:hover { background:darkred; }
+    .controls { text-align:center; margin-top:12px; }
+    .btn-volver {
+      background-color: #64dd17;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .btn-vaciar {
+      background-color: #f44336;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .btn-volver:hover, .btn-vaciar:hover {
+      filter: brightness(.95);
+    }
+  </style>
+</head>
+<body>
+  <h2>Datos Registrados</h2>
+
+  <div class="controls">
+    <button class="btn-volver" onclick="location.href='GEIASTYPING.html'">Volver a prueba</button>
+    <button class="btn-vaciar" onclick="clearAll()">Vaciar toda la tabla</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre Completo</th>
+        <th>Teléfono</th>
+        <th>WPM</th>
+        <th>Exactitud (%)</th>
+        <th>Errores</th>
+        <th>Tiempo Final</th>
+        <th>Fecha</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="userTable"></tbody>
+  </table>
+
+  <script>
+    function loadUsers() {
+      const users = JSON.parse(localStorage.getItem("typingUsers")) || [];
+      const table = document.getElementById("userTable");
+      table.innerHTML = "";
+      users.forEach((user, i) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${user.name}</td>
+          <td>${user.phone}</td>
+          <td>${user.wpm}</td>
+          <td>${user.accuracy}</td>
+          <td>${user.mistakes}</td>
+          <td>${user.time}</td>
+          <td>${new Date(user.date).toLocaleString()}</td>
+          <td><button class="btn-red" onclick="deleteUser(${i})">Eliminar</button></td>
+        `;
+        table.appendChild(tr);
+      });
+    }
+
+    function deleteUser(index) {
+      let users = JSON.parse(localStorage.getItem("typingUsers")) || [];
+      users.splice(index, 1);
+      localStorage.setItem("typingUsers", JSON.stringify(users));
+      loadUsers();
+    }
+
+    function clearAll() {
+      if (confirm("¿Eliminar todos los registros?")) {
+        localStorage.removeItem("typingUsers");
+        loadUsers();
+      }
+    }
+
+    window.onload = loadUsers;
+  </script>
+</body>
+</html>

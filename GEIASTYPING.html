@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GEIAS Typing Test</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="stats">
+      <div class="stats-left">
+        <img src="LogoGEIAS.jpeg" alt="Logo" class="stats-img">
+      </div>
+      <div class="stats-right">
+        <p>Tiempo: <span id="timer">0s</span></p>
+        <p>Errores: <span id="mistakes">0</span></p>
+      </div>
+    </div>
+
+    <div id="quote" onmousedown="return false" onselectstart="return false"></div>
+
+    <textarea id="quote-input" class="hidden-input" aria-label="entrada de prueba"></textarea>
+
+    <div class="controls">
+      <button id="start-test">Iniciar Prueba</button>
+      <button id="stop-test" style="display:none;">Detener Prueba</button>
+    </div>
+
+    <div class="result" style="display:none;">
+      <h3>Resultado</h3>
+      <div class="wrapper">
+        <p>Exactitud: <span id="accuracy">0 %</span></p>
+        <p>Velocidad: <span id="wpm">0 wpm</span></p>
+        <button id="return-test" class="btn return" style="display:none;">Volver a prueba</button>
+
+        <a href="datos.html" id="btn-table" style="display:none;">
+          <button type="button" class="btn-table">Tabla de Datos</button>
+        </a>
+      </div>
+
+      <div id="user-data-form" style="display:none; margin-top:20px;">
+        <h3>Ingrese sus datos</h3>
+        <input type="text" id="fullName" placeholder="Nombre completo" />
+        <input type="tel" id="phoneNumber" placeholder="Teléfono" />
+        <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
+          <button id="save-data-btn">Enviar Datos</button>
+          <a href="datos.html" id="btn-table" style="display:none;">
+          <button type="button" class="btn-table">Tabla de Datos</button>
+        </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
