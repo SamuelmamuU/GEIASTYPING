@@ -1,13 +1,12 @@
 * { box-sizing: border-box; margin:0; padding:0; font-family: "Poppins", sans-serif; }
 body { background: #008000; }
 .container {
-  width: 200vmin; 
+  width: 170vmin; 
   padding: 50px 30px;
   background:#fff;
-  /* Se elimina el posicionamiento absoluto para evitar que el contenido se corte */
   position: absolute;
-  margin: 5px auto;
-  top: 50%;
+  margin: 60px auto;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius:10px;
@@ -21,21 +20,33 @@ body { background: #008000; }
   display:flex;
   align-items:center;
   justify-content:space-between;
+
   margin-bottom:30px;
+}
+.stats-left {
+  flex: 1;
+}
+.stats-center {
+  flex: 1;
+  text-align: center;
+  font-size: 30px;
+}
+
+h2 {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.stats-right {
+  flex: 1;
+  text-align: right;
+  font-size: 18px;
 }
 .stats-img {
   width:290px;
   height:200px;
   object-fit:contain;
   margin-right:30px;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
-.stats-img:hover {
-  transform: scale(1.05);
-  box-shadow: 3px 5px 10px rgba(0,0,0,.3);
-}
-.stats-right { text-align:right; font-size:18px; }
-.stats span { font-weight:600; }
 
 /* Quote text */
 #quote {
@@ -44,18 +55,19 @@ body { background: #008000; }
   font-size:22px;
   line-height:1.6;
   white-space: normal;
-  overflow-wrap: break-word; /* Rompe palabras largas solo si no caben */
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 /* Cada carácter es un span para colorear */
 .quote-chars {
-  display:inline-block;
-  white-space: pre-wrap; /* Permite saltos de línea automáticos y mantiene espacios */
+  display:inline;
+  white-space: pre-wrap;
   font-size:22px;
   color:#111;
 }
-.quote-chars.success { color:#44b267; } /* verde */
-.quote-chars.fail { color:#e81c4e; }    /* rojo */
+.quote-chars.success { color:#44b267; }
+.quote-chars.fail { color:#e81c4e; }
 
 /* Hidden input: off-screen but focusable */
 .hidden-input {
@@ -72,11 +84,20 @@ body { background: #008000; }
 /* Buttons and result */
 button { background-color:#64dd17; color:#fff; border:none; padding:10px 20px; border-radius:6px; font-size:16px; cursor:pointer; transition: background-color 0.3s ease; }
 button:hover { background-color:#4caf50; }
-.controls { display:flex; gap:12px; justify-content:flex-end; }
-.result { margin-top:40px; }
-.result h3 { text-align:center; margin-bottom:20px; font-size:22px; }
-.wrapper { display:flex; justify-content:center; gap:16px; align-items:center; flex-wrap:wrap; }
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  margin-top: 0px                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ;
+}
 
+.result h3 { text-align:center; margin-bottom:20px; font-size:22px; }
+.wrapper { display:flex; justify-content:center; gap: 16px; align-items:center; flex-wrap:wrap; }
+
+.btn-result-wrapper {
+  text-align: center;
+  margin-top: 20px;
+}
 #return-test { background-color:#64dd17; }
 #btn-table .btn-table { background-color:#ff9800; color:white; border-radius:6px; padding:8px 12px; transition: background-color 0.3s ease; }
 #btn-table .btn-table:hover { background-color:#f57c00; }

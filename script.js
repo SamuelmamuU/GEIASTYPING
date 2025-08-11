@@ -17,7 +17,6 @@ let timer = null;
 let mistakes = 0;
 let currentQuote = null; 
 
-
 const quotes = [
   "Como ingeniero administrador de sistemas, eres el arquitecto invisible. Diseñas la estructura, optimizas los flujos y garantizas que la tecnología se convierta en una herramienta, no en un obstáculo. Tu ingenio crea el futuro, línea por línea, con cada sistema que construyes.",
   "La creatividad es la inteligencia divirtiéndose. A menudo, las ideas más innovadoras surgen de la experimentación y de atreverse a pensar de manera diferente. Fomentar la curiosidad es el primer paso para desbloquear un potencial ilimitado.",
@@ -27,7 +26,6 @@ const quotes = [
 ];
 
 function renderNewQuote() {
-  
   if (!currentQuote) {
     const randomIndex = Math.floor(Math.random() * quotes.length);
     currentQuote = quotes[randomIndex];
@@ -35,9 +33,7 @@ function renderNewQuote() {
   
   quote = currentQuote;
 
- 
   const arr = quote.split("").map(ch => {
-    
     return `<span class="quote-chars">${ch}</span>`;
   });
   quoteSection.innerHTML = arr.join("");
@@ -47,19 +43,16 @@ function renderNewQuote() {
   accEl.innerText = "0 %";
 }
 
-
 userInput.addEventListener("input", () => {
   const quoteChars = Array.from(document.querySelectorAll(".quote-chars"));
   const userInputChars = userInput.value.split("");
   mistakes = 0;
 
- 
   quoteChars.forEach((charSpan, index) => {
     const typed = userInputChars[index];
     charSpan.classList.remove("success", "fail");
 
     if (typed == null) {
-      // aún no se escribió este carácter
       return;
     }
     if (typed === charSpan.textContent) {
@@ -70,19 +63,16 @@ userInput.addEventListener("input", () => {
     }
   });
 
- 
   const extras = Math.max(0, userInputChars.length - quoteChars.length);
   if (extras > 0) mistakes += extras;
 
   mistakesEl.innerText = mistakes;
 
-  
   const correctCharsCount = document.querySelectorAll(".quote-chars.success").length;
   if (correctCharsCount === quoteChars.length) {
     displayResult();
   }
 });
-
 
 function updateTimer() {
   if (time <= 0) {
@@ -99,9 +89,7 @@ function timeReduce() {
   timer = setInterval(updateTimer, 1000);
 }
 
-
 function displayResult() {
-  
   if (timer !== null) {
     clearInterval(timer);
     timer = null;
@@ -114,22 +102,17 @@ function displayResult() {
   const typed = userInput.value.length;
   const correctCharsCount = document.querySelectorAll(".quote-chars.success").length;
 
-  
   const elapsedSeconds = Math.max(1, 60 - time);
   const minutes = Math.max(elapsedSeconds / 60, 1 / 60);
 
-  
   const wpm = (correctCharsCount / 5) / minutes;
   const wpmText = isFinite(wpm) ? wpm.toFixed(2) : "0";
 
-  
   const accuracy = typed > 0 ? Math.round((correctCharsCount / typed) * 100) : 0;
 
-  
   wpmEl.innerText = wpmText + " wpm";
   accEl.innerText = accuracy + " %";
 
-  
   window.tempTestData = {
     wpm: wpmText,
     accuracy: accuracy,
@@ -137,12 +120,9 @@ function displayResult() {
     timeFinal: (time <= 0) ? "Se terminó tiempo" : elapsedSeconds + "s"
   };
 
-  
   returnBtn.style.display = "inline-block";
-  btnTableAnchor.style.display = "inline-block";
   userDataForm.style.display = "block";
 }
-
 
 function startTest() {
   mistakes = 0;
@@ -150,16 +130,14 @@ function startTest() {
   userInput.value = "";
   startBtn.style.display = "none";
   stopBtn.style.display = "inline-block";
+  btnTableAnchor.style.display = "none"; // Ocultar el botón al iniciar
   resultBox.style.display = "none";
   returnBtn.style.display = "none";
-  btnTableAnchor.style.display = "none";
   userDataForm.style.display = "none";
   renderNewQuote();
   timeReduce();
-  
   userInput.focus();
 }
-
 
 function saveUserData() {
   const fullName = document.getElementById("fullName").value.trim();
@@ -182,23 +160,19 @@ function saveUserData() {
     date: new Date().toISOString()
   };
 
- 
   users.unshift(newEntry);
   localStorage.setItem("typingUsers", JSON.stringify(users));
 
-  
   document.getElementById("fullName").value = "";
   document.getElementById("phoneNumber").value = "";
 
   alert("Datos guardados correctamente (puedes agregar otro).");
 }
 
-
 startBtn.addEventListener("click", startTest);
 stopBtn.addEventListener("click", displayResult);
 returnBtn.addEventListener("click", () => location.reload());
 saveDataBtn.addEventListener("click", saveUserData);
-
 
 window.addEventListener("load", () => {
   userInput.value = "";
